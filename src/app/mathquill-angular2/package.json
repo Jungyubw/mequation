@@ -1,0 +1,7 @@
+{
+  "name": "@taskbase/mathquill-angular",
+  "version": "1.0.1",
+  "dependencies": {
+    "mathquill-typescript": "^2.0.5"
+  }
+}
