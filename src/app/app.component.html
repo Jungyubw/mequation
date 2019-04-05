@@ -4,9 +4,40 @@
     Welcome to {{ title }}!!!!
   </h1>
 </div>
-
-<div class="p-grid">
-  <div class="p-col-fixed" style="width:500px">Fixed</div>
-  <div class="p-col">Autvsndksnvkjsnvknskvnjdksnvkjdsnvkjsdnvkjo</div>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-md-6">
+    <p-fileUpload name="myfile[]" customUpload="true" [uploadLabel]="'load'" (uploadHandler)="myUploader($event)"></p-fileUpload>
+  </div>
+  <div class="ui-g-12 ui-md-6">
+    <p-selectButton [options]="modes" [(ngModel)]="selectedMode"></p-selectButton>
+  </div>
 </div>
 
+<div class="ui-g ui-fluid" *ngFor="let line of eScriptLines; let i = index">
+  <div style="margin: 0px;padding: 0px;background: gray;width: 30px;height: 30px;">
+    {{i + 1}}
+  </div>
+  <div class="ui-g-12 ui-md-5" style="margin: 0px;padding: 0px;">
+    <div class="ui-inputgroup">
+      <input type="text" pInputText (change)="interpretLine(line)" [(ngModel)]="line.editText" />
+      <button type="button" (click)="openEQEditor(line)" pButton label="EQ" [disabled]="line.editText.indexOf('$EQ$') < 0"></button>
+    </div>
+  </div>
+  <div style="margin: 0px;padding: 0px;background: gray;width: 30px;height: 30px;">
+    {{i + 1}}
+  </div>
+  <div *ngIf="selectedMode === 'Equation'" class="ui-g-12 ui-md-5" style="margin: 0px;padding: 0px;">
+    <span>{{line.preText}}</span>
+    <mq-viewer *ngIf="line && line.eq" [equation]="line.eq"></mq-viewer>
+    <span>{{line.postText}}</span>
+  </div>
+
+  <div *ngIf="selectedMode === 'Script'" class="ui-g-12 ui-md-5" style="margin: 0px;padding: 0px;">
+    <span>{{line.scriptText}}</span>
+  </div>
+</div>
+<button pButton type="button" (click)="addLine()" label="Add" ></button>
+
+<p-dialog *ngIf="display" header="Title" [(visible)]="display">
+  <mq-editor [options]="options" [equation] ="selectedLine.eq" (valueChange)='displayChange($event)'>></mq-editor>
+</p-dialog>

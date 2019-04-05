@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditorComponent } from './editor/editor.component';
+import { ViewerComponent } from './viewer/viewer.component';
 
 import { MathquillService } from './mathquill.service';
 import {FormsModule} from "@angular/forms";
@@ -13,8 +14,8 @@ export { MathquillService } from './mathquill.service';
     CommonModule,
     FormsModule
   ],
-  declarations: [EditorComponent, MathButtonComponent],
-  exports: [EditorComponent]
+  declarations: [EditorComponent, ViewerComponent, MathButtonComponent],
+  exports: [EditorComponent, ViewerComponent]
 })
 export class MathquillAngular2Module {
   static forRoot() {

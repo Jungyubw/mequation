@@ -1,4 +1,14 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {MathquillService} from '../mathquill.service';
 import {IMathQuill} from 'mathquill-typescript';
 import {MathquillEditorOptions} from '../mathquill-editor-options.model';
@@ -6,12 +16,18 @@ import {MathquillEditorOptions} from '../mathquill-editor-options.model';
 @Component({
   selector: 'mq-editor',
   templateUrl: './editor.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./editor.component.css']
 })
 export class EditorComponent implements OnInit {
 
   @Input()
   options: MathquillEditorOptions;
+
+  @Input()
+  equation:string;
+
+  @Output() valueChange = new EventEmitter();
 
   mq: IMathQuill;
 
@@ -42,6 +58,12 @@ export class EditorComponent implements OnInit {
   };
 
   ngOnInit() {
+    console.log(this.equation);
   }
 
+
+  submit() {
+    this.refreshLatex();
+    this.valueChange.emit(this.latexSource);
+  }
 }

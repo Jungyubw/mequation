@@ -3,20 +3,18 @@
   <div id="editable-math"
        class="mathquill-math-field"
        #editableMath>
-    {{' \\frac{d}{dx}\\sqrt{x}= '}}
+    {{equation}}
   </div>
   
   <div style="height: 10px"></div>
   
   <div class="math-button-box">
-    
     <mq-math-button mytext="{{mathButton}}"
                     *ngFor="let mathButton of options.buttonLatexContents"
                     (click)="clicked(mathButton)">
     </mq-math-button>
-    
   </div>
-  
-  <!--p>Latex source: <textarea id="latex-source" style="width:80%;vertical-align:top" [(ngModel)]='latexSource' ></textarea></p-->
+
+  <button type="button" (click)="submit()" pButton label="Submit">Submit</button>
 
 </div>
