@@ -12,13 +12,16 @@ import {InputTextModule} from 'primeng/inputtext';
 import {DialogModule} from 'primeng/dialog';
 import {FileUploadModule} from 'primeng/fileupload';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { MathquillAngular2Module } from './mathquill-angular2/index';
+import { CanvasComponent } from './canvas/canvas.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CanvasComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -32,6 +35,7 @@ import { MathquillAngular2Module } from './mathquill-angular2/index';
     DialogModule,
     FileUploadModule,
     MathquillAngular2Module.forRoot(),
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

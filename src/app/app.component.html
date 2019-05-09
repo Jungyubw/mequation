@@ -38,6 +38,15 @@
 </div>
 <button pButton type="button" (click)="addLine()" label="Add" ></button>
 
+<div class="example-boundary">
+  <div class="example-box" *ngFor="let line of eScriptLines; let i = index" cdkDragBoundary=".example-boundary" cdkDrag>
+    <span>{{line.preText}}</span>
+    <mq-viewer *ngIf="line && line.eq" [equation]="line.eq"></mq-viewer>
+    <span>{{line.postText}}</span>
+  </div>
+</div>
+
+
 <p-dialog *ngIf="display" header="Title" [(visible)]="display">
   <mq-editor [options]="options" [equation] ="selectedLine.eq" (valueChange)='displayChange($event)'>></mq-editor>
 </p-dialog>
